@@ -1,0 +1,47 @@
+html, body {
+	min-height: 100%;
+}
+
+body {
+	font-family: 'Lora', serif;
+}
+
+#intro {
+	@include transform(translateY(-50%));
+	text-align: center;
+	position: absolute;
+	font-size: 48px;
+	width: 100%;
+	top: 50%;
+	opacity: 0;
+	@include transition(opacity .5s);
+	&.hide {
+		opacity: 0;
+	}
+	&.active {
+		opacity: 1;
+	}
+}
+
+#content li {
+	top: 50%;
+	left: 15%;
+	width: 70%;
+	opacity: 0;
+	list-style: none;
+	position: absolute;
+	@include transition(opacity .5s);
+	@include transform(translateY(-50%));
+	.quote {
+		color: #FF6666;
+		font-size: 52px;
+		margin-bottom: 10px;
+	}
+	.work {
+		font-style: italic;
+	}
+	&.active {
+		opacity: 1;
+		@include transition(opacity .5s .5s);
+	}
+}
