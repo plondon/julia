@@ -41,6 +41,11 @@ body {
     margin-bottom: 10px; }
     #content li .quote.big {
       font-size: 36px; }
+    @media (max-width: 720px) {
+      #content li .quote {
+        font-size: 30px; }
+        #content li .quote.big {
+          font-size: 24px; } }
     #content li .quote span {
       opacity: 0;
       -webkit-transition: opacity 1s;
