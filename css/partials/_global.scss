@@ -34,6 +34,9 @@ body {
 		color: #FF6666;
 		font-size: 52px;
 		margin-bottom: 10px;
+		&.big {
+			font-size: 36px;
+		}
 		span {
 			opacity: 0;
 			@include transition(opacity 1s);
@@ -56,6 +59,12 @@ body {
 		opacity: 1;
 		@include transition(opacity .5s .5s);
 	}
+	&.hide {
+		.quote span, .cite {
+			@include transition(opacity .5s);
+			opacity: 0 !important;
+		}
+	}
 }
 
 .next {
@@ -74,8 +83,14 @@ body {
 		content: '';
 		position: absolute;
 		@include triangle(30px, black, down);
+		@include transition(border-top-color 0.5s);
 	}
 	&.active {
 		opacity: 1;
+	}
+	&:hover {
+		&:after {
+			@include triangle(30px, #FF6666, down);
+		}
 	}
 }

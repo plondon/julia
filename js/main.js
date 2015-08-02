@@ -14,8 +14,6 @@ var splitQuotes = function() {
 		$(this).html(spans);
 		count++
 
-		console.log(count)
-		console.log(maxCount)
 		if ( count === maxCount ) {
 			$(window).trigger('quotes-ready');
 		}
@@ -25,8 +23,9 @@ var splitQuotes = function() {
 
 $(document).ready(function() {
 	(function($) {
-		var idx = 0;
-		var $quotes = $('.quote');
+		this.idx = 0;
+		var self = this;
+		var $quotes = $('#content > li');
 
 		splitQuotes();
 
@@ -42,7 +41,7 @@ $(document).ready(function() {
 				return false;
 			}
 
-			goto(idx);
+			goto(self.idx);
 
 			var char = getChar(e);
 
@@ -51,6 +50,28 @@ $(document).ready(function() {
 
 		var goto = function(i) {
 			$quotes.removeClass('active');
+			$quotes.filter('.complete').addClass('hide');
+
+			if ( $($quotes.filter('.complete')[0]).hasClass('last') ) {
+
+				$('.next').removeClass('active');
+				setTimeout(function() {
+					self.over = true;
+					$('#intro').html('The End.').removeClass('hide').addClass('active');
+					$('.next').removeClass('active');
+					return;
+				}, 1000);
+
+			} else if ( $quotes.filter('.complete')[0] ) {
+
+				$quotes.removeClass('complete');
+				setTimeout(function() {
+					$('.next').removeClass('active');
+					$('#intro').removeClass('hide').addClass('active');
+				}, 1000);
+
+			}
+
 			$($quotes[i]).addClass('active');
 		};
 
@@ -73,8 +94,6 @@ $(document).ready(function() {
 
 			var p = activated/length;
 
-			console.log(p)
-
 			if ( p > .3 ) {
 				return true;
 			} else {
@@ -83,8 +102,7 @@ $(document).ready(function() {
 		};
 
 		var complete = function() {
-			var $activeQuote = $quotes.filter('.active');
-
+			var $activeQuote = $quotes.filter('.active').addClass('complete');
 
 			setTimeout(function() {
 				// activate all the letters
@@ -92,7 +110,7 @@ $(document).ready(function() {
 
 				setTimeout(function() {
 					// activate the citation
-					$activeQuote.parent().find('.cite').addClass('active');
+					$activeQuote.find('.cite').addClass('active');
 
 					// activate the next triangle
 					setTimeout(function() {
@@ -106,7 +124,12 @@ $(document).ready(function() {
 
 		$(window).on('quotes-ready', activate());
 		$(window).on('keyup.window', function(e) {
+			if ( self.over ) { return; }
 			controlKeyup(e);
+		});
+		$('.next').on('click', function(e) {
+			goto(self.idx + 1);
+			self.idx += 1;
 		});
 	})(jQuery);
 });
