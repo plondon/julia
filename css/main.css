@@ -60,3 +60,29 @@ body {
     -webkit-transition: opacity 0.5s 0.5s;
     -moz-transition: opacity 0.5s 0.5s;
     transition: opacity 0.5s 0.5s; }
+
+.next {
+  -webkit-transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  margin-left: -15px;
+  position: absolute;
+  cursor: pointer;
+  bottom: 50px;
+  height: 30px;
+  width: 30px;
+  opacity: 0;
+  left: 50%; }
+  .next:after {
+    top: 0;
+    left: 0;
+    content: '';
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 15px;
+    border-top-color: black; }
+  .next.active {
+    opacity: 1; }

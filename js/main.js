@@ -87,10 +87,20 @@ $(document).ready(function() {
 
 
 			setTimeout(function() {
+				// activate all the letters
 				$activeQuote.find('span').addClass('active');
+
 				setTimeout(function() {
+					// activate the citation
 					$activeQuote.parent().find('.cite').addClass('active');
-				}, 1000);
+
+					// activate the next triangle
+					setTimeout(function() {
+						$('.next').addClass('active');
+					}, 1000);
+
+				}, 1800);
+
 			}, 1000);
 		}
 

@@ -57,3 +57,25 @@ body {
 		@include transition(opacity .5s .5s);
 	}
 }
+
+.next {
+	@include transition(opacity .5s);
+	margin-left: -15px;
+	position: absolute;
+	cursor: pointer;
+	bottom: 50px;
+	height: 30px;
+	width: 30px;
+	opacity: 0;
+	left: 50%;
+	&:after {
+		top: 0;
+		left: 0;
+		content: '';
+		position: absolute;
+		@include triangle(30px, black, down);
+	}
+	&.active {
+		opacity: 1;
+	}
+}
