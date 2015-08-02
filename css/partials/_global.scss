@@ -25,8 +25,8 @@ body {
 
 #content li {
 	top: 50%;
-	left: 15%;
-	width: 70%;
+	left: 10%;
+	width: 80%;
 	list-style: none;
 	position: absolute;
 	@include transform(translateY(-50%));
@@ -71,7 +71,6 @@ body {
 	@include transition(opacity .5s);
 	margin-left: -15px;
 	position: absolute;
-	cursor: pointer;
 	bottom: 50px;
 	height: 30px;
 	width: 30px;
@@ -87,6 +86,7 @@ body {
 	}
 	&.active {
 		opacity: 1;
+		cursor: pointer;
 	}
 	&:hover {
 		&:after {

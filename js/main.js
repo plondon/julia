@@ -30,6 +30,7 @@ $(document).ready(function() {
 		splitQuotes();
 
 		var activate = function() {
+			$('body').css('opacity', '1');
 			$('#intro').addClass('active');
 		};
 
@@ -38,6 +39,7 @@ $(document).ready(function() {
 
 			if ( isFinished() ) {
 				complete();
+				self.complete = true;
 				return false;
 			}
 
@@ -50,6 +52,7 @@ $(document).ready(function() {
 
 		var goto = function(i) {
 			$quotes.removeClass('active');
+			$('.next').removeClass('active');
 			$quotes.filter('.complete').addClass('hide');
 
 			if ( $($quotes.filter('.complete')[0]).hasClass('last') ) {
@@ -65,6 +68,7 @@ $(document).ready(function() {
 			} else if ( $quotes.filter('.complete')[0] ) {
 
 				$quotes.removeClass('complete');
+				self.complete = false;
 				setTimeout(function() {
 					$('.next').removeClass('active');
 					$('#intro').removeClass('hide').addClass('active');
@@ -124,10 +128,11 @@ $(document).ready(function() {
 
 		$(window).on('quotes-ready', activate());
 		$(window).on('keyup.window', function(e) {
-			if ( self.over ) { return; }
+			if ( self.over || self.complete ) { return; }
 			controlKeyup(e);
 		});
 		$('.next').on('click', function(e) {
+			if ( !$(this).hasClass('active') ) { return; }
 			goto(self.idx + 1);
 			self.idx += 1;
 		});
